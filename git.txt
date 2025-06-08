@@ -1,0 +1,338 @@
+git
+
+영상
+https://www.youtube.com/watch?v=1I3hMwQU6GU&t=5924s
+──────────────────────────────
+Chapter 1
+
+lesson1 
+https://www.yalco.kr/@git-github/1-1/
+
+vcs
+Version Control System 
+프로그램의 <시간>과 <차원>을 관리
+
+──────────────────────────────
+lesson2 설치 윈도우 세팅
+https://www.yalco.kr/@git-github/1-2/
+
+vscode
+터미널 단축키 : ctrl + `
+
+ctrl + shift + p > select default profile 
+이걸 이용하면 처음 만들때 바로 git으로 연결됨
+원치 안을 경우 터미널에서 옆에 화살표시에 원하는 터미널 연결
+──────────────────────────────
+lesson4 cli vs gui 무엇을 사용해야 할까요?
+https://www.yalco.kr/@git-github/1-4/
+
+CLI : Command Line Interface
+명령줄을 입력해서 사용
+
+GUI : Graphical User Interface
+그래픽 요소를 이용한 인터페이스
+──────────────────────────────
+lesson 5. git설정 & 프로젝트 관리 시작하기
+https://www.yalco.kr/@git-github/1-5/
+
+git config --global = 내 컴퓨터에 전반적으로 설정을 하겠다
+
+입력
+git config --global user.name "이름"
+git config --global user.email "본인 이메일"
+현재입력 EndDefault , sun
+
+확인방법 
+git config --global uesr.name < 이름 확인
+git config --global user.email < 이메일 확인
+
+기본 브랜치명 변경
+git config --global init.defaultBranch main 
+master와 slave가 기본이지만 요즘은 main을 건장함
+
+- 프로젝트 생성 & git관리
+프로젝트의 최상위 폴더생성 > vscode로 열기 > 터미널을 git Bash로 설정(설정후 +)
+
+git init > 폴더에 숨겨진 폴더가 생김(.git)
+.git을 지우면 git으로 관리하던 모든게 날라감
+
+강의 예제
+-----------------------------------------------
+tigers.yaml < 파일
+
+team: Tigers
+
+manager: John
+
+members:
+- Linda
+- William
+- David
+-----------------------------------------------
+lions.yaml < 파일
+
+team: Lions
+
+manager: Mary
+
+members:
+- Thomas
+- Karen
+- Margaret
+-----------------------------------------------
+
+git status
+현재 폴더에서 현재 폴더의 상황을 git의 관점에서 보여주는 것
+
+소스트리로 해보기
+
+-원래 있던거 북마크
+내가 git에게 맞긴(git init한) 폴더를 소스트리(로컬 저장소)로 끌고가기
+북마크 처럼 사용(삭제시 북마크 제거 클릭)
+
+-새로 만들기(git init기능)
+create > 내가 원하는 폴더 선택 > 생성
+
+──────────────────────────────
+6강
+git에게 맏기질 않을 파일이나 폴더 설정
+
+이유
+> 포함할 필요가 없을 때 
+	-자동으로 생성 또는 다운로드되는 파일들 (빌드 결과물, 라이브러리)
+	예) java 프로그램 실행후 생기는 class
+
+> 포함하지 마아야할 때
+	- 보안상 민감한 정보를 담은 파일
+	예) 개인정보, 회사기밀 등
+
+.gitignore 파일 생성 후 원하는 파일을 안에 정의
+그러면 git status에서 안보인
+
+===================================================
+Chapter2
+
+lesson1 - 변화를 타임캡슐에 담아 묻기
+버전을 캡슐이라 서술
+
+추적하지 않는(untracked)파일 : git의 관리에 들어간  적 없는 파일 < add한적 없는 파일
+
+git add [파일 이름] < 이걸 통해서 캐슐 안에 넣을 수 있음
+
+git add . < 모든 파일 담기
+
+Changes to be committed: 묻을 준비가 되었다.
+
+commit 캡슐 묻기
+
+git commit < 현재 버전업으로 조금 달라진거 같음
+commit 쉽게 넣는법
+git commit -m ["원하는 텍스트 입력"]
+
+git log  > 커밋 기록(히스토리)을 조회하는 기능
+k : 위로, j : 아래 , q : 나가기
+
+git diff > 추가, 변경, 삭제 부분을 확인할 수 있다 < 캡슐안에 없으면 추적 불가
+k : 위로, j : 아래 , q : 나가기
+
+
+git commit -am "(메시지)"
+──────────────────────────────
+2강 - 과거로 돌아가는 두 가지 방법
+
+Reset VS Revert
+
+Reset : 시간을 과거로 되도리는 것
+
+revert : 되돌리기 원하는 시점의 커밋을 거꾸로 실행합니다.
+──────────────────────────────
+3강 - 과거로 돌아가기 실습
+
+log의 한 부분
+----------------------------------------------------------
+commit 96c8571b637f6fca6256750369f1c6f534cd4cda
+Author: EndDefault <sungyu0127@gmail.com>
+Date:   Sat May 10 20:34:42 2025 +0900
+
+    Add team Cheetas
+----------------------------------------------------------
+돌아가기 원하는 commit의 해시를 기역
+
+git reset --hard (돌아갈 커밋 해시) 예 96c8571b637f6fca6256750369f1c6f534cd4cda
+
+<되돌리기> - 그냥 보여준거임
+폴더를 관리하는 .git 폴더를 (reset하기 전의 폴더파일)을 다시 git이 관리하는
+폴더를 넣어줌
+git reset --hard < 위의 상테에서 그냥 코드를 입력하면 .git폴더가 가지고 있는 상태로 만듬
+끝
+
+git revert (되돌릴 커밋 해시) 
+더이상 입력할게 없으면 editer을 닫아줌
+
+맘약 revert중 문재가 생겼을 경우(되돌릴 파일의 일부가 변경되었을 경우)
+git rm (파일이름)
+git revert --continue
+
+git revert --no-commit (되돌릴  커밋 해시) < add상태로 commit 붙이지 않은 상태로 돌아감
+내가 그 지점으로 돌아간 다음 추가적인 작업을 하기 위함
+원래되도 돌아가기 git reset --hard
+──────────────────────────────
+4강 sourceTree로 진행해보기
+
+스테이지 올리기 (add)
+우측상단 커밋클릭
+커밋을 달고 하단에 커밋버튼 클릭(commit)
+원하는 커밋의 위치에서 우클릭
+커밋 되돌리기(revert)
+이 커밋까지 현재 브랜치를 초기화(reset)
+설정있음hard로 설정(--hard)
+
+===================================================
+Chapter 3
+【 1강 - 여러 branch만들어보기】
+Branch: 분기된 가지 (다른 차원)
+프로젝트를 하나 이상의 모습으로 관리해야 할 때
+
+예) 실배포용, 테스트서버용, 새로운 시도용
+여러 작업들이 각각 독립되어 진행될 때
+
+예) 신기능 1, 신기능 2, 코드개선, 긴급수정...
+각각의 차원에서 작업한 뒤 확정된 것을 메인 차원에 통합
+
+[1. 브랜치 생성/ 이동/ 삭제하기]
+
+Ⅰ. add-coach란 이름의 브랜치 생성
+	git branch add-coach
+
+Ⅱ. 브랜치 목록 확인]
+	git branch
+
+Ⅲ. add-coach 브랜치로 이동
+	git switch add-coach
+-checkout 명령어가 Git 2.23 버전부터 switch, restore로 분리
+
+
+ Ⅳ. 브랜치 생성과 동시에 이동하기]
+	git switch -c new-teams
+ - 기존의 git checkout -b (새 브랜치명)
+
+
+【2강 - branch를 합치는 두 가지 방법】
+
+merge : 두 브랜치를 한 커밋에 이어붙입니다.
+	- 브랜치 사용내역을 남길 필요가 있을 때 적합한 방식입니다.
+	- 다른 형태의 merge에 대해서도 이후 다루게 될 것입니다.
+
+rebase : 브랜치를 다른 브랜치에 이어붙입니다.
+	- 한 줄로 깔끔히 정리된 내역을 유지하기 원할 때 적합합니다.
+	- 이미 팀원과 공유된 커밋들에 대해서는 사용하지 않는 것이 좋습니다.
+
+【3강 - branch 합치기 실습】
+
+1. merge : 대상을 현재 브랜치와 합치기 - branch가 남아 있음
+	- git merge (합칠 대상 브랜치)
+
+[병합된 브랜치 삭제]
+	git branch -d (합체되 브랜치)
+
+2. rebase 합치기 
+	git rebase (뒤에 붙이고 싶은 브랜치)
+- 뒤에 붙인거지 합쳐진게 아님
+
+병합하기
+위치-붙여진 브랜드(뒤에 병합이 안됀)
+	git merge (뒤에 붙은 브랜치)
+
+
+【4강 - 충돌 해결하기】
+
+충돌 해결 방법
+
+[같은 줄에 다른 정의 할시 발생]
+Accept Current change | Accept Incoming Change | Accept Both Changes | Compare Changes
+<<<<<<< HEAD : 현재
+manager: Kenneth : 현재 문장
+=======
+manager: Deborah : merge한 문장
+>>>>>>> (merge한 브랜치 이름) 
+위에 4개중 선택(클랙)
+
+
+merge 중단
+	git merge --abort
+
+해결시
+	git add ., git commit(입력 아해도 넣어줌)을 사용
+
+
+rebase 중단
+	git merge --abort
+
+해결시 
+	git add ., git rebase --continue
+ - 차례대로 뒤에 붙이는 것이기 때문에 다음게 있을 수 있음
+
+*만약 오류 수정 중에서 의미가 없어지면(고친 부분이 하나도 없어짐) 결과에서 사라짐
+ 
+
+---------------------------------------------------
+github
+
+Personal access token 만들기
+
+* 우측 상단의 프로필 - Settings
+* Developer Settings
+* Personal access tokens - Generate new token
+
+2022년 이후 변경됨  Fine-grained Token 최신버전
+| 항목      		| Fine-grained Token 			| Classic Token         	 		|
+| --------		| --------------------------------------	| -------------------------------------  |
+| 권한 범위 		| 저장소 단위로 세분화  		| 계정 전체 또는 조직 전체 권한     |
+| 권한 종류    	| 리포지토리 기능별 세부 설정 가능| 범위(Scope) 단위 설정        		|
+| 보안성      	| 높음                 			| 낮음                     			|	
+| 만료일      	| **필수**             			| 선택                   			|
+| 조직 정책 제어 	| 지원함                			| 제한적                  			|
+| 권장 여부    	| ✅ **GitHub 권장 방식** 		| ❌ **이전 방식 (점차 대체 예정)** |
+
+*토큰 보관
+- 현재 테스트로 만든 것 : 
+
+윈도우 가이드
+* Windows 자격 증명 관리자
+* Windows 자격 증명 선택
+* git:https://github.com 자격 정보 생성
+* 사용자명과 토큰 붙여넣기
+
+내가 만든 프로젝트에서 settings > Colaborators 에서 사람추가 가능
+
+
+프로젝트에서 https에서
+1. git이 없으면 첫번째
+2. git이 있으면 2번째
+
+GitHub 레포지토리 생성 후 복붙 명령어
+git remote add origin (원격 저장소 주소) 
+로컬의 Git 저장소에 원격 저장소로의 연결 추가
+원격 저장소 이름에 흔히 origin 사용. 다른 것으로 수정 가능
+
+git branch -M main
+GitHub 권장 - 기본 브랜치명을 main으로
+
+로컬 저장소의 커밋 내역들 원격으로 push(업로드)
+-u 또는 --set-upstream : 현재 브랜치와 명시된 원격 브랜치 기본 연결
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
